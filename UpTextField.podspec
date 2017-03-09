@@ -6,5 +6,7 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.author             = { "wangguimin" => "870503894@qq.com" }
   s.source       = { :git => "https://github.com/wangguimin/UpTextField.git", :tag => "#{s.version}" }
-  s.source_files  = "UpTextFieldDemo/UpTextFieldDemo/UpTextField/*.{h,m}"
+  s.source_files  = "UpTextField/*.{h,m}"
+  s.frameworks   = "Foundation"
+  s.platform     = :ios, "8.0"
 end
