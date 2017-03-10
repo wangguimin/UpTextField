@@ -7,10 +7,10 @@
 //
 
 #import "UpTextField.h"
+#import "UIColor+ColorWithHexStrig.h"
+#import "NSString+IsPhone.h"
 
 @interface UpTextField ()
-
-
 
 @end
 @implementation UpTextField
@@ -31,7 +31,7 @@
 - (UIButton *)rightView{
     if (!_rightView) {
         self.rightView = [UIButton buttonWithType:UIButtonTypeCustom];
-        _rightView.frame = CGRectMake(0, 0, w(150), self.textField.height);
+        _rightView.frame = CGRectMake(0, 0, (150 / 660) * self.frame.size.height, self.textField.frame.size.height);
         _rightView.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
         self.textField.rightView = _rightView;
         self.textField.rightViewMode = UITextFieldViewModeAlways;
@@ -64,25 +64,25 @@
                           image:(NSString *)imageName
                    keyboardType:(UIKeyboardType)keyboardType
 {
-    self.textField = [[WGMTextField alloc] initWithFrame:CGRectMake(0, getH(self) / 3, getW(self), (getH(self) / 3) * 2) ];
+    self.textField = [[WGMTextField alloc] initWithFrame:CGRectMake(0, self.frame.size.height / 3, self.frame.size.width, (self.frame.size.height / 3) * 2) ];
     self.textField.keyboardType = keyboardType;
     self.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.textField.delegate = self;
     [self.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     self.textField.borderStyle = UITextBorderStyleNone;
-    self.textField.font = font(32);
-    self.textField.textColor =  ColorWithHexString(@"333333");
+    self.textField.font = [UIFont systemFontOfSize:((32 / 2) / 667.0) * [UIScreen mainScreen].bounds.size.height];
+    self.textField.textColor = [UIColor colorWithHexString:@"333333"];
     
    
-    [self.textField addLineAtBottomWithLineWidth:0.5 lineColor:GlobalGray];
+    [self.textField addLineAtBottomWithLineWidth:0.5 lineColor:[UIColor colorWithHexString:@"cccccc"]];
     
    
     [self addSubview:self.textField];
     
-    self.lable = [[UILabel alloc] initWithFrame:CGRectMake(0, self.height - h(48) - h(54), self.textField.width, h(48))];
-    self.lable.font = font(32);
-    self.lable.textColor = GlobalGray;
+    self.lable = [[UILabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height  -  self.frame.size.height * 102 / 180, self.textField.frame.size.width, self.frame.size.height * 48 / 180)];
+    self.lable.font = [UIFont systemFontOfSize:((32 / 2) / 667.0) * [UIScreen mainScreen].bounds.size.height];
+    self.lable.textColor = [UIColor colorWithHexString:@"cccccc"];
     self.lable.text = placeholder;
     self.lable.backgroundColor = [UIColor clearColor];
     
@@ -117,17 +117,17 @@
 {
     if (![self textFieldIsText:self]) {
         [UIView animateWithDuration:0.5 animations:^{
-            self.lable.transform = CGAffineTransformMakeTranslation(0, -h(60));
-            self.lable.font = font(20);
-            self.lable.textColor = GlobalBlue;
-            [(CAShapeLayer *)self.textField.layer.sublayers[0] setStrokeColor:GlobalBlue.CGColor];
+            self.lable.transform = CGAffineTransformMakeTranslation(0, -(self.frame.size.height * 60 / 180));
+            self.lable.font = [UIFont systemFontOfSize:((20 / 2) / 667.0) * [UIScreen mainScreen].bounds.size.height];
+            self.lable.textColor = [UIColor colorWithHexString:@"50cbff"];
+            [(CAShapeLayer *)self.textField.layer.sublayers[0] setStrokeColor:[UIColor colorWithHexString:@"50cbff"].CGColor];
         }];
     } else {
-        if (![self.lable.font isEqual:font(20)]) {
-            self.lable.transform = CGAffineTransformMakeTranslation(0, -h(60));
-            self.lable.font = font(20);
-            self.lable.textColor = GlobalBlue;
-            [(CAShapeLayer *)self.textField.layer.sublayers[0] setStrokeColor:GlobalBlue.CGColor];
+        if (![self.lable.font isEqual:[UIFont systemFontOfSize:((20 / 2) / 667.0) * [UIScreen mainScreen].bounds.size.height]]) {
+            self.lable.transform = CGAffineTransformMakeTranslation(0, -(self.frame.size.height * 60 / 180));
+            self.lable.font = [UIFont systemFontOfSize:((20 / 2) / 667.0) * [UIScreen mainScreen].bounds.size.height];
+            self.lable.textColor = [UIColor colorWithHexString:@"50cbff"];
+            [(CAShapeLayer *)self.textField.layer.sublayers[0] setStrokeColor:[UIColor colorWithHexString:@"50cbff"].CGColor];
         }
     }
     
@@ -141,9 +141,9 @@
     if (![self textFieldIsText:upTF]) {
         [UIView animateWithDuration:0.5 animations:^{
             upTF.lable.transform = CGAffineTransformIdentity;
-            upTF.lable.font = font(32);
-            upTF.lable.textColor = GlobalGray;
-            [(CAShapeLayer *)upTF.textField.layer.sublayers[0] setStrokeColor:GlobalGray.CGColor];
+            upTF.lable.font = [UIFont systemFontOfSize:((32 / 2) / 667.0) * [UIScreen mainScreen].bounds.size.height];
+            upTF.lable.textColor = [UIColor colorWithHexString:@"cccccc"];
+            [(CAShapeLayer *)upTF.textField.layer.sublayers[0] setStrokeColor:[UIColor colorWithHexString:@"cccccc"].CGColor];
         }];
     }
     

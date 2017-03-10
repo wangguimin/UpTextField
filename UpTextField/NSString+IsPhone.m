@@ -1,117 +1,17 @@
 //
-//  NSString+Category.m
+//  NSString+IsPhone.m
 //  OralRobot
 //
 //  Created by 王桂敏 on 16/5/30.
 //  Copyright © 2016年 wangguimin. All rights reserved.
 //
 
-#import "NSString+Category.h"
+#import "NSString+IsPhone.h"
 #import <Foundation/Foundation.h>
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
 
-@implementation NSString (Category)
-
-
-/*
- * 判断字符串是否为空白的
- */
-- (BOOL)isBlank
-{
-    if ((self == nil) || (self.length == 0)) {
-        return YES;
-    }
-    
-    NSString *trimedString = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    if ([trimedString length] == 0) {
-        return YES;
-    } else {
-        return NO;
-    }
-    
-    return YES;
-}
-
-/*
- * 判断字符串是否为空
- */
-- (BOOL)isEmpty
-{
-    return ((self.length == 0) || (self == nil) || ([self isKindOfClass:[NSNull class]]) || (self.length == 0));
-}
-
-/*
- * 给字符串md5加密
- */
-- (NSString*)md5
-{
-    const char *ptr = [self UTF8String];
-    
-    unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
-    
-    CC_MD5(ptr, (CC_LONG)strlen(ptr), md5Buffer);
-    
-    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
-        [output appendFormat:@"%02x",md5Buffer[i]];
-    
-    return output;
-}
-
-
-/**
- * 判断字符串是否是6位长度的验证码
- */
-- (BOOL)isVerificationCode{
-    if (self.length == 0) {
-        return NO;
-    }
-    
-    NSString *regex = @"^[0-9]{6}$";
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    BOOL isMatch = [pred evaluateWithObject:self];
-    if (!isMatch) {
-        return NO;
-    }
-    
-    return YES;
-}
-
-
-/**
- * 判断字符串是否是密码格式
- */
-- (BOOL)isPassword
-{
-    
-    if (self.length < 6 || self.length > 18) {
-        return NO;
-    }
-   /*
-    if (self.length == 0) {
-        return NO;
-    }
-    NSString *regex = @"^[a-zA-Z0-9]{6,18}$";// 密码长度为6-16位字母和数字
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    BOOL isMatch = [pred evaluateWithObject:self];
-    if (!isMatch) {
-        return NO;
-    }
-    */
-    return YES;
-}
-
-/**
- * 判断字符串是否是email格式
- */
-
-- (BOOL)isEmail
-{
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    return [emailTest evaluateWithObject:self];
-}
+@implementation NSString (IsPhone)
 
 /**
  * 判断字符串是否是手机号码格式
