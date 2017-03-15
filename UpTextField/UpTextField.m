@@ -75,7 +75,7 @@
 - (UIButton *)rightView{
     if (!_rightView) {
         self.rightView = [UIButton buttonWithType:UIButtonTypeCustom];
-        _rightView.frame = CGRectMake(0, 0, (150 / 660) * self.frame.size.height, self.textField.frame.size.height);
+        _rightView.frame = CGRectMake(0, 0, self.textField.frame.size.height, self.textField.frame.size.height);
         _rightView.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
         self.textField.rightView = _rightView;
         self.textField.rightViewMode = UITextFieldViewModeAlways;
@@ -115,8 +115,8 @@
 
 - (void)setRightViewWithNormalImage:(NSString *)normalImage
                   selectedImageView:(NSString *)selectedImageView{
-    [self.rightView setImage:[UIImage imageNamed:@"normalImage"] forState:UIControlStateNormal];
-    [self.rightView setImage:[UIImage imageNamed:@"selectedImageView"] forState:UIControlStateSelected];
+    [self.rightView setImage:[UIImage imageNamed:normalImage] forState:UIControlStateNormal];
+    [self.rightView setImage:[UIImage imageNamed:selectedImageView] forState:UIControlStateSelected];
 }
 
 
