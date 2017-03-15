@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "UpTextField"
-  s.version      = “1.0.4”
+  s.version      = "1.0.5"
   s.summary      = "A Library for iOS to use for RSA encryptor."
   s.homepage     = "https://github.com/wangguimin/UpTextField"
   s.license      = "MIT"
