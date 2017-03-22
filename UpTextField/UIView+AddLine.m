@@ -15,8 +15,6 @@
                           lineColor:(UIColor *)lineColor{
     
     CGMutablePathRef path = CGPathCreateMutable();
-    
-    
     CAShapeLayer *lineLayer = [CAShapeLayer layer];
     lineLayer.lineWidth = lineWidth;
     lineLayer.lineCap = kCALineCapButt;
@@ -25,6 +23,7 @@
     CGPathMoveToPoint(path, nil, startPoint.x, startPoint.y);
     CGPathAddLineToPoint(path, nil, endPoint.x, endPoint.y);
     lineLayer.path = path;
+    CGPathRelease(path);
     return lineLayer;
     
 }
